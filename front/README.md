@@ -1,6 +1,11 @@
+
 # Front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+This project was create with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+
+## Install 
+The first things do is to install all dependencies
+Run `npm install` but you have to install first nodejs
 
 ## Development server
 
