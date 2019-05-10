@@ -4,7 +4,9 @@
 This project was create with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
 
 ## Install 
-The first things do is to install all dependencies, you have to install first nodejs.
+First you have to install nodejs.
+
+After you have to install all dependencies. 
 Run `npm install` 
 
 ## Development server
