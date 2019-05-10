@@ -1,0 +1,61 @@
+<ng-container>
+  <mat-toolbar class="mat-elevation" color="primary">
+    <span>WEM - Web Mining</span>
+  </mat-toolbar>
+
+  <div class="container is-fluid mat-drawer-container" style="margin:0px; height:100%; overflow: auto">
+    <div class="level">
+      <div class="level-item has-text-centered">
+        <div class="form has-text-centered">
+          <mat-form-field class="full-width " appearance="outline">
+            <mat-label>Url</mat-label>
+            <input matInput placeholder="Url" type="text" autocomplete="off" (change)="search($event.target.value)">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <app-loading-screen></app-loading-screen>
+    <div class="columns" style="margin: 0 20px" [hidden]="!data.length">
+      <div class="column is-6">
+        <mat-list *ngFor="let objet of data">
+          <mat-list-item style="font-size: 1.3em">
+            <span mat-line>
+              <a href="https://arxiv.org/abs/{{objet.idPage}}" target="_blank">arXiv:{{objet.idPage}}</a>
+              <span class="linkDoc"> [</span>
+              <span *ngFor="let document of objet.documents ; index as i"><a href="https://arxiv.org/{{document.type}}/{{objet.idPage}}" style="display: inline;">{{document.type}}<ng-container *ngIf="i<objet.documents.length-1">,  </ng-container></a>
+              </span>
+              <span class="linkDoc">]</span>
+              <mat-chip-list style="display: inline-block">
+                <mat-chip *ngFor="let tag of objet.tags">{{tag.description}}</mat-chip>
+              </mat-chip-list>
+            </span>
+            <h1 mat-line class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
+            <span mat-line>
+              <strong>Authors</strong>:
+              <span *ngFor="let author of objet.authors">{{author}} </span>
+            </span>
+            <div mat-line><strong>Abstract</strong>: {{objet.abstract}}</div>
+          </mat-list-item>
+         <!-- <mat-divider></mat-divider>-->
+        </mat-list>
+        <div class="level">
+          <div class="level-item level-left" style="margin-top: 20px" *ngIf="data.length && totalResult > data.length">
+            <mat-paginator style="background:none"
+                           [length]="totalResult"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="[10, 15, 25, 50, 100]">
+            </mat-paginator>
+          </div>
+        </div>
+        <br style="margin-bottom: 60px">
+      </div>
+      <!--<div class="column is-4">
+        <mat-list *ngFor="let d of data">
+          <mat-list-item>{{d}}</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div> -->
+    </div>
+  </div>
+</ng-container>
