@@ -1,0 +1,21 @@
+.form {
+  min-width: 150px;
+  max-width: 900px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.mat-standard-chip{
+  min-height: 22px;
+  align-items: end;
+  align-self: end;
+  padding: 0px 16px;
+  margin: 0 10px !important;
+}
+.linkDoc {
+  color: #92827b;
+}
+
+.full-width {
+  width: 100%;
+}
