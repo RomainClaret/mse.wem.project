@@ -32,6 +32,21 @@ class Search(Resource):
                 "result": result}, 200
 
 
+class Stat(Resource):
+    def get(self, idDocument, category):
+        result = [{"authors": ["aut1", "aut2", "aut3"],
+                   "title": "title",
+                   "idPage": 1905.00871,
+                   "abstract": "Abstract",
+                   "tags": [{"description": "tag1"}],
+                   "documents": [{"type": "pdf"}, {"type": "ps"}, {"type": "format"}],
+                   }]
+        return {"idDocument": idDocument,
+                "category": category,
+                "result": result}, 200
+
+
+api.add_resource(Stat, "/api/stat/<string:idDocument>/<string:category>")
 api.add_resource(Search, "/api/search/<string:search>")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 

@@ -14,6 +14,6 @@ export class DataLoaderService {
 
   search(valueSearch): Observable<any> {
     return this.http.get<any>(`http://127.0.0.1:5000/api/search/53?page=3`)
-      .pipe(debounceTime(200), distinctUntilChanged(),);
+      .pipe(debounceTime(200), distinctUntilChanged());
   }
 }

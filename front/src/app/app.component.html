@@ -27,7 +27,7 @@
               </span>
               <span class="linkDoc">]</span>
               <mat-chip-list style="display: inline-block">
-                <mat-chip *ngFor="let tag of objet.tags">{{tag.description}}</mat-chip>
+                <mat-chip *ngFor="let tag of objet.tags" (click)="displayStatCategory(tag,objet)">{{tag.description}}</mat-chip>
               </mat-chip-list>
             </span>
             <h1 mat-line class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
@@ -56,6 +56,20 @@
           <mat-divider></mat-divider>
         </mat-list>
       </div> -->
+      <div class="column is-6">
+        <div *ngIf="statsCategory.length">
+          <div style="display: block">
+            <canvas baseChart
+                    [datasets]="statsCategory"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>
