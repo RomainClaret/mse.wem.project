@@ -62,31 +62,30 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   displayStatCategory(tag: any, objet: any) {
-    const e = {
-      'Year': {'0': 2018, '1': 2018, '2': 2018, '3': 2019, '4': 2019, '5': 2019, '6': 2019, '7': 2019},
-      'Month': {'0': '12', '1': '11', '2': '10', '3': '05', '4': '04', '5': '03', '6': '02', '7': '01'},
-      'Papers': {'0': 1112, '1': 1310, '2': 483, '3': 345, '4': 1378, '5': 1071, '6': 1206, '7': 1095}
-    };
-    const stats = [];
-    this.barChartLabels = [];
-    Object.keys(e.Year).map((key) => {
-      stats.push(e.Papers[key]);
-      this.barChartLabels.push(e.Month[key] + '.' + e.Year[key]);
+    this.dataLoaderService.stat(objet.idPage, tag).subscribe((event) => {
+      const stats = [];
+      const result = event.result;
+      this.barChartLabels = [];
+      Object.keys(result.Year).map((key) => {
+        stats.push(result.Papers[key]);
+        this.barChartLabels.push(result.Month[key] + '.' + result.Year[key]);
+      });
+      this.statsCategory = [
+        {data: stats, label: tag.description},
+      ];
     });
-    console.log(tag);
-    console.log(stats);
-
-    this.statsCategory = [
-      {data: stats, label: tag.description},
-    ];
   }
-
 
   private applyDarkTheme() {
     const color = '#e0e0e0';
     const overrides = {
       legend: {
         labels: {fontColor: color}
+      },
+      plugins: {
+        datalabels: {
+          color: '#ffffff'
+        }
       },
       scales: {
         xAxes: [{

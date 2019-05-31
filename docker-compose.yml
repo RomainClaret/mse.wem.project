@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   neo4j:
     image: neo4j:3.5
     ports:
@@ -11,6 +10,26 @@ services:
       - NEO4J_AUTH=none
     volumes:
       - neo4j-data:/data
+
+  front:
+    container_name: webmining-front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - "./front/dist/front/:/usr/share/nginx/html/"
+    ports:
+      - 80:80
+      
+  back:
+    container_name: webmining-back
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    volumes:
+      - "./back/app/:/app/"
+    ports:
+      - 5000:5000
 
 volumes:
   neo4j-data:
