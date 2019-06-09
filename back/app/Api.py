@@ -36,18 +36,21 @@ class Search(Resource):
 
 class Stat(Resource):
     def get(self, idDocument, category):
-        result = {
-            'Year': stat_categories["Year"],
-            'Month': stat_categories["Month"],
-            'Values': stat_categories[category]
-        }
+        if category == "AllCat":
+            result = stat_categories
+        else:
+            result = {
+                'Year': stat_categories["Year"],
+                'Month': stat_categories["Month"],
+                'Values': stat_categories[category]
+            }
         return {"idDocument": idDocument,
                 "category": category,
                 "result": result}, 200
 
 
 def readStat():
-    with open('arxiv_data_cs_all_cats_stats_years_months.json') as json_file:
+    with open('arxiv_data_cs_all_stats_primary_cats_years_months.json') as json_file:
         return json.load(json_file)
 
 

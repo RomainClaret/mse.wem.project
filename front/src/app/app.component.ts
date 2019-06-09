@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   barChartLabels: Label[] = [];
   barChartType: ChartType = 'line';
   barChartLegend = true;
-  docStatSelected: string;
+  docStatSelected: any;
 
   statsCategory: ChartDataSets[] = [];
 
@@ -72,7 +72,30 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.displayStatCategory('Papers', {title: 'All Document'});
   }
 
+  displayCompareCategory() {
+    this.dataLoaderService.stat('all', 'AllCat').subscribe((event) => {
+      this.docStatSelected = {title: 'Sum categories'};
+      const stats = [];
+      const result = event.result;
+      this.barChartLabels = [];
+      this.barChartType = 'bar';
+      Object.keys(result)
+        .filter(key => ['Year', 'Month', 'Papers'].indexOf(key) < 0)
+        .map((key) => {
+          const sum = Object.keys(result[key]).map(k => {
+            return result[key][k];
+          }).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+          stats.push(sum);
+          this.barChartLabels.push(key);
+        });
+      this.statsCategory = [
+        {data: stats, label: 'Categories'},
+      ];
+    });
+  }
+
   displayStatCategory(category: any, objet: any) {
+    this.barChartType = 'line';
     this.dataLoaderService.stat(objet.idPage, category).subscribe((event) => {
       this.docStatSelected = objet;
       const stats = [];
