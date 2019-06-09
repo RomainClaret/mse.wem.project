@@ -18,27 +18,32 @@
     <app-loading-screen></app-loading-screen>
     <div class="columns" style="margin: 0 20px" [hidden]="!data.length">
       <div class="column is-6">
-        <mat-list *ngFor="let objet of data">
-          <mat-list-item style="font-size: 1.3em">
-            <span mat-line>
+        <div *ngFor="let objet of data">
+          <div style="font-size: 1.3em">
+            <span>
               <a href="https://arxiv.org/abs/{{objet.idPage}}" target="_blank">arXiv:{{objet.idPage}}</a>
               <span class="linkDoc"> [</span>
-              <span *ngFor="let document of objet.documents ; index as i"><a href="https://arxiv.org/{{document.type}}/{{objet.idPage}}" style="display: inline;">{{document.type}}<ng-container *ngIf="i<objet.documents.length-1">,  </ng-container></a>
+              <span *ngFor="let document of objet.documents ; index as i"><a
+                href="https://arxiv.org/{{document.type}}/{{objet.idPage}}" style="display: inline;">{{document.type}}
+                <ng-container *ngIf="i<objet.documents.length-1">,  </ng-container></a>
               </span>
               <span class="linkDoc">]</span>
               <mat-chip-list style="display: inline-block">
-                <mat-chip *ngFor="let tag of objet.tags" (click)="displayStatCategory(tag,objet)">{{tag.description}}</mat-chip>
+                <mat-chip *ngFor="let category of objet.categories"
+                          (click)="displayStatCategory(category,objet)">{{category}}</mat-chip>
               </mat-chip-list>
             </span>
-            <h1 mat-line class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
-            <span mat-line>
+            <h1 class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
+            <span>
               <strong>Authors</strong>:
               <span *ngFor="let author of objet.authors">{{author}} </span>
             </span>
-            <div mat-line><strong>Abstract</strong>: {{objet.abstract}}</div>
-          </mat-list-item>
-         <!-- <mat-divider></mat-divider>-->
-        </mat-list>
+            <div><strong>Summary</strong>:{{objet.summary}}</div>
+          </div>
+
+          <mat-divider></mat-divider>
+          <br>
+        </div>
         <div class="level">
           <div class="level-item level-left" style="margin-top: 20px" *ngIf="data.length && totalResult > data.length">
             <mat-paginator style="background:none"
@@ -58,7 +63,7 @@
       </div> -->
       <div class="column is-6">
         <div *ngIf="statsCategory.length">
-          <div style="display: block">
+          <div style="display: block" class="stat">
             <canvas baseChart
                     [datasets]="statsCategory"
                     [labels]="barChartLabels"

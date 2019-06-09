@@ -14,12 +14,12 @@ export class DataLoaderService {
   }
 
   search(valueSearch): Observable<any> {
-    return this.http.get<any>(`${environment.server}/api/search/53?page=3`)
+    return this.http.get<any>(`${environment.server}/api/search/${valueSearch}`)
       .pipe(debounceTime(200), distinctUntilChanged());
   }
 
-  stat(idDocument, categorie): Observable<any> {
-    return this.http.get<any>(`${environment.server}/api/stat/idDocument/category`)
+  stat(idDocument, category): Observable<any> {
+    return this.http.get<any>(`${environment.server}/api/stat/${idDocument}/${category}`)
       .pipe(debounceTime(200), distinctUntilChanged());
   }
 }

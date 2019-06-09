@@ -19,3 +19,8 @@
 .full-width {
   width: 100%;
 }
+
+.stat{
+  position: fixed;
+  width: 47%;
+}

@@ -1,7 +1,8 @@
-#!/bin/sh
 from flask import Flask
 from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
+
+from reader import readCsv
 
 app = Flask(__name__)
 api = Api(app)
@@ -10,7 +11,6 @@ api = Api(app)
 # https://codeburst.io/this-is-how-easy-it-is-to-create-a-rest-api-8a25122ab1f3
 # pip install -U flask-cors
 # pip install flask_restful
-
 
 class Search(Resource):
     def get(self, search):
@@ -31,7 +31,7 @@ class Search(Resource):
         return {"total": total, "page": page,
                 "pageSize": pageSize,
                 "search": search,
-                "result": result}, 200
+                "result": inMemory[0:10]}, 200
 
 
 class Stat(Resource):
@@ -49,5 +49,5 @@ class Stat(Resource):
 api.add_resource(Stat, "/api/stat/<string:idDocument>/<string:category>")
 api.add_resource(Search, "/api/search/<string:search>")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
-
-app.run(debug=False,host='0.0.0.0',port=5000)
+inMemory = readCsv()
+app.run(debug=False, host='0.0.0.0', port=5000)

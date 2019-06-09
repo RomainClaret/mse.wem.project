@@ -87,21 +87,24 @@ def populate(filename):
 
         # secondary categories nodes
         for c in record.primary_category.split('|'):
-            cat = get_category_node(graph, tx, c)
-            rel = Relationship(pub, "HAS_CATEGORY", cat)
-            tx.create(rel)
+            if c:
+                cat = get_category_node(graph, tx, c)
+                rel = Relationship(pub, "HAS_CATEGORY", cat)
+                tx.create(rel)
 
         # authors nodes
         for a in record.authors.split('|'):
-            author = get_author_node(graph, tx, a)
-            rel = Relationship(author, "WROTE", pub)
-            tx.create(rel)
+            if a:
+                author = get_author_node(graph, tx, a)
+                rel = Relationship(author, "WROTE", pub)
+                tx.create(rel)
 
         # affiliations nodes
         for a in record.affiliations.split('|'):
-            affiliation = get_affiliation_node(graph, tx, a)
-            rel = Relationship(pub, "IS_AFFILIATE", affiliation)
-            tx.create(rel)
+            if a:
+                affiliation = get_affiliation_node(graph, tx, a)
+                rel = Relationship(pub, "IS_AFFILIATE", affiliation)
+                tx.create(rel)
 
         tx.commit()
 

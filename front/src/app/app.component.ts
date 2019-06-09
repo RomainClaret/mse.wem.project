@@ -61,8 +61,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  displayStatCategory(tag: any, objet: any) {
-    this.dataLoaderService.stat(objet.idPage, tag).subscribe((event) => {
+  displayStatCategory(category: any, objet: any) {
+    this.dataLoaderService.stat(objet.idPage, category).subscribe((event) => {
       const stats = [];
       const result = event.result;
       this.barChartLabels = [];
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.barChartLabels.push(result.Month[key] + '.' + result.Year[key]);
       });
       this.statsCategory = [
-        {data: stats, label: tag.description},
+        {data: stats, label: category},
       ];
     });
   }
