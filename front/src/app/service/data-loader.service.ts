@@ -13,8 +13,8 @@ export class DataLoaderService {
 
   }
 
-  search(valueSearch): Observable<any> {
-    return this.http.get<any>(`${environment.server}/api/search/${valueSearch}`)
+  search(valueSearch, pageSize, page): Observable<any> {
+    return this.http.get<any>(`${environment.server}/api/search/${valueSearch}?page=${page}&pageSize=${pageSize}`)
       .pipe(debounceTime(200), distinctUntilChanged());
   }
 

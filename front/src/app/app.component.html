@@ -38,14 +38,14 @@
               <strong>Authors</strong>:
               <span *ngFor="let author of objet.authors">{{author}} </span>
             </span>
-            <div><strong>Summary</strong>:{{objet.summary}}</div>
+            <div><strong>Summary</strong>: {{objet.summary}}</div>
           </div>
 
           <mat-divider></mat-divider>
           <br>
         </div>
         <div class="level">
-          <div class="level-item level-left" style="margin-top: 20px" *ngIf="data.length && totalResult > data.length">
+          <div class="level-item level-left" style="margin-top: 20px" [ngClass]="displayPaginatorStyle()">
             <mat-paginator style="background:none"
                            [length]="totalResult"
                            [pageSize]="pageSize"
@@ -54,6 +54,7 @@
           </div>
         </div>
         <br style="margin-bottom: 60px">
+
       </div>
       <!--<div class="column is-4">
         <mat-list *ngFor="let d of data">
@@ -64,6 +65,7 @@
       <div class="column is-6">
         <div *ngIf="statsCategory.length">
           <div style="display: block" class="stat">
+            <h1 class="title">{{docStatSelected.title}}</h1>
             <canvas baseChart
                     [datasets]="statsCategory"
                     [labels]="barChartLabels"

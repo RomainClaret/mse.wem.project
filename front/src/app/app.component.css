@@ -24,3 +24,7 @@
   position: fixed;
   width: 47%;
 }
+
+.hide{
+   display:none
+}

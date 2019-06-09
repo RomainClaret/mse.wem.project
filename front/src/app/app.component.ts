@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   barChartLabels: Label[] = [];
   barChartType: ChartType = 'line';
   barChartLegend = true;
+  docStatSelected: string;
   public barChartPlugins = [pluginDataLabels];
 
   statsCategory: ChartDataSets[] = [];
@@ -44,18 +45,29 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   private loadData(value) {
-    this.dataLoaderService.search(value).subscribe(data => {
+    this.dataLoaderService.search(value, this.pageSize, this.page).subscribe(data => {
       this.data = data.result;
       this.totalResult = data.total;
+      this.ngAfterViewInit();
     });
   }
 
+  displayPaginatorStyle(): string {
+    if (this.data.length && this.totalResult > this.data.length) {
+      return '';
+    }
+    return 'hide';
+  }
+
   ngAfterViewInit(): void {
+    console.log(this.paginator);
     if (this.paginator) {
+      console.log('paginator');
       this.paginator.page.subscribe(
         (event) => {
           this.pageSize = event.pageSize;
           this.page = event.pageIndex;
+          console.log('ok');
           this.loadData(this.textSearch);
         });
     }
@@ -63,6 +75,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   displayStatCategory(category: any, objet: any) {
     this.dataLoaderService.stat(objet.idPage, category).subscribe((event) => {
+      this.docStatSelected = objet;
       const stats = [];
       const result = event.result;
       this.barChartLabels = [];

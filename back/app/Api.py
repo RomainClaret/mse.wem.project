@@ -13,25 +13,23 @@ api = Api(app)
 # pip install flask_restful
 
 class Search(Resource):
+    def searchData(self, search):
+        return inMemory
+
     def get(self, search):
         parser = reqparse.RequestParser()
-        parser.add_argument('page', type=str)
+        parser.add_argument('page', type=int)
         parser.add_argument('pageSize', type=int)
         args = parser.parse_args()
         pageSize = args["pageSize"]
         page = args["page"]
-        total = 1
-        result = [{"authors": ["aut1", "aut2", "aut3"],
-                   "title": "title",
-                   "idPage": 1905.00871,
-                   "abstract": "Abstract",
-                   "tags": [{"description": "tag1"}],
-                   "documents": [{"type": "pdf"}, {"type": "ps"}, {"type": "format"}],
-                   }]
+        result = self.searchData(search)
+        total = len(result)
+        print(str(pageSize) + " " + search + " " + str(page))
         return {"total": total, "page": page,
                 "pageSize": pageSize,
                 "search": search,
-                "result": inMemory[0:10]}, 200
+                "result": result[pageSize * page:(pageSize * (page + 1))]}, 200
 
 
 class Stat(Resource):
@@ -40,7 +38,7 @@ class Stat(Resource):
             'Year': {'0': 2018, '1': 2018, '2': 2018, '3': 2019, '4': 2019, '5': 2019, '6': 2019, '7': 2019},
             'Month': {'0': '12', '1': '11', '2': '10', '3': '05', '4': '04', '5': '03', '6': '02', '7': '01'},
             'Papers': {'0': 1112, '1': 1310, '2': 483, '3': 345, '4': 1378, '5': 1071, '6': 1206, '7': 1095}
-        };
+        }
         return {"idDocument": idDocument,
                 "category": category,
                 "result": result}, 200

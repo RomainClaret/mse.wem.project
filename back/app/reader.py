@@ -24,6 +24,7 @@ def readCsv():
                 idPdf = tempIdPdf[4]
                 documents.append({"type": "pdf"})
             l.append({
+                "id":row[0],
                 "idPage": row[0].split("/")[4],
                 "updated": row[1],
                 "published": row[2],
