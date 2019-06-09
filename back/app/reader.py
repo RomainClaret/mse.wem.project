@@ -1,12 +1,12 @@
+import bz2
 import csv
-
-from itsdangerous import encoding
 
 
 def readCsv():
-    file_name = "arxive_data.csv"
+    file_name = "arxiv_data_cs_all.csv.bz2"
     try:
-        csvfile = open(file_name, 'rt', encoding="utf8")
+        # csvfile = open(file_name, 'rt', encoding="utf8")
+        csvfile = bz2.open(file_name, 'rt', encoding="utf8")  # open the file
         csvReader = csv.reader(csvfile, delimiter=",")
     except:
         print("File not found")
@@ -24,7 +24,6 @@ def readCsv():
                 idPdf = tempIdPdf[4]
                 documents.append({"type": "pdf"})
             l.append({
-                "id":row[0],
                 "idPage": row[0].split("/")[4],
                 "updated": row[1],
                 "published": row[2],
@@ -40,4 +39,5 @@ def readCsv():
                 "documents": documents,
             })
         i = i + 1
+    print("Number of lignes: " + str(len(l)))
     return l
