@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     scales: {xAxes: [{}], yAxes: [{}]},
   };
   barChartLabels: Label[] = [];
-  barChartType: ChartType = 'line';
+  barChartType: ChartType = 'bar';
   barChartLegend = true;
   docStatSelected: any;
 
@@ -78,7 +78,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       const stats = [];
       const result = event.result;
       this.barChartLabels = [];
-      this.barChartType = 'bar';
       Object.keys(result)
         .filter(key => ['Year', 'Month', 'Papers'].indexOf(key) < 0)
         .map((key) => {
@@ -95,7 +94,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   displayStatCategory(category: any, objet: any) {
-    this.barChartType = 'line';
     this.dataLoaderService.stat(objet.idPage, category).subscribe((event) => {
       this.docStatSelected = objet;
       const stats = [];
