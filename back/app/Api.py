@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask
 from flask_cors import CORS
 from flask_restful import Resource, Api, reqparse
@@ -21,18 +23,22 @@ class Search(Resource):
         parser.add_argument('page', type=int)
         parser.add_argument('pageSize', type=int)
         args = parser.parse_args()
-        pageSize = args["pageSize"]
+        page_size = args["pageSize"]
         page = args["page"]
         result = self.searchData(search)
         total = len(result)
-        print(str(pageSize) + " " + search + " " + str(page))
+        print(str(page_size) + " " + search + " " + str(page))
         return {"total": total, "page": page,
-                "pageSize": pageSize,
+                "pageSize": page_size,
                 "search": search,
-                "result": result[pageSize * page:(pageSize * (page + 1))]}, 200
+                "result": result[page_size * page:(page_size * (page + 1))]}, 200
 
 
 class Stat(Resource):
+    def readStat(self):
+        with open('arxiv_data_cs_all_stats_years.json') as json_file:
+            return json.load(json_file)
+
     def get(self, idDocument, category):
         result = {
             'Year': {'0': 2018, '1': 2018, '2': 2018, '3': 2019, '4': 2019, '5': 2019, '6': 2019, '7': 2019},
@@ -48,4 +54,5 @@ api.add_resource(Stat, "/api/stat/<string:idDocument>/<string:category>")
 api.add_resource(Search, "/api/search/<string:search>")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 inMemory = readCsv()
+
 app.run(debug=False, host='0.0.0.0', port=5000)
