@@ -19,7 +19,7 @@ services:
     volumes:
       - "./front/dist/front/:/usr/share/nginx/html/"
     ports:
-      - 80:80
+      - 8080:80
 
   back:
     container_name: wem-back
