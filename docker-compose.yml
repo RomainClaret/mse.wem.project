@@ -3,6 +3,7 @@ version: '3'
 services:
   neo4j:
     image: neo4j:3.5
+    container_name: wem-neo4j
     ports:
       - 7474:7474
       - 7687:7687
@@ -12,20 +13,18 @@ services:
       - neo4j-data:/data
 
   front:
-    container_name: webmining-front
+    container_name: wem-front
     build:
       context: ./front
-      dockerfile: Dockerfile
     volumes:
       - "./front/dist/front/:/usr/share/nginx/html/"
     ports:
       - 80:80
-      
+
   back:
-    container_name: webmining-back
+    container_name: wem-back
     build:
       context: ./back
-      dockerfile: Dockerfile
     volumes:
       - "./back/app/:/app/"
     ports:
