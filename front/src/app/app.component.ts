@@ -3,7 +3,6 @@ import {MatPaginator} from '@angular/material';
 import {DataLoaderService} from './service/data-loader.service';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label, ThemeService} from 'ng2-charts';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +26,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   barChartType: ChartType = 'line';
   barChartLegend = true;
   docStatSelected: string;
-  public barChartPlugins = [pluginDataLabels];
 
   statsCategory: ChartDataSets[] = [];
 
@@ -48,7 +46,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.dataLoaderService.search(value, this.pageSize, this.page).subscribe(data => {
       this.data = data.result;
       this.totalResult = data.total;
-      this.ngAfterViewInit();
+      document.querySelector('#basic_container').scrollTop = 0;
     });
   }
 
@@ -60,17 +58,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.paginator);
     if (this.paginator) {
-      console.log('paginator');
       this.paginator.page.subscribe(
         (event) => {
           this.pageSize = event.pageSize;
           this.page = event.pageIndex;
-          console.log('ok');
           this.loadData(this.textSearch);
         });
     }
+  }
+
+  displayAllStatCategory() {
+    this.displayStatCategory('Papers', {title: 'All Document'});
   }
 
   displayStatCategory(category: any, objet: any) {
@@ -79,10 +78,13 @@ export class AppComponent implements OnInit, AfterViewInit {
       const stats = [];
       const result = event.result;
       this.barChartLabels = [];
-      Object.keys(result.Year).map((key) => {
-        stats.push(result.Papers[key]);
-        this.barChartLabels.push(result.Month[key] + '.' + result.Year[key]);
-      });
+      Object.keys(result.Values)
+        .sort((k1, k2) => (result.Year[k1] + result.Month[k1]) - (result.Year[k2] + result.Month[k2]))
+        .filter(key => result.Values[key] > 0)
+        .map((key) => {
+          stats.push(result.Values[key]);
+          this.barChartLabels.push(result.Month[key] + '.' + result.Year[key]);
+        });
       this.statsCategory = [
         {data: stats, label: category},
       ];
@@ -123,6 +125,7 @@ export class AppComponent implements OnInit, AfterViewInit {
           },
           ticks: {
             fontColor: color,
+            min: 0,
           },
           gridLines: {
             display: false,

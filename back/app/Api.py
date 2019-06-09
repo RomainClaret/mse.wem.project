@@ -35,21 +35,23 @@ class Search(Resource):
 
 
 class Stat(Resource):
-    def readStat(self):
-        with open('arxiv_data_cs_all_stats_years.json') as json_file:
-            return json.load(json_file)
-
     def get(self, idDocument, category):
         result = {
-            'Year': {'0': 2018, '1': 2018, '2': 2018, '3': 2019, '4': 2019, '5': 2019, '6': 2019, '7': 2019},
-            'Month': {'0': '12', '1': '11', '2': '10', '3': '05', '4': '04', '5': '03', '6': '02', '7': '01'},
-            'Papers': {'0': 1112, '1': 1310, '2': 483, '3': 345, '4': 1378, '5': 1071, '6': 1206, '7': 1095}
+            'Year': stat_categories["Year"],
+            'Month': stat_categories["Month"],
+            'Values': stat_categories[category]
         }
         return {"idDocument": idDocument,
                 "category": category,
                 "result": result}, 200
 
 
+def readStat():
+    with open('arxiv_data_cs_all_cats_stats_years_months.json') as json_file:
+        return json.load(json_file)
+
+
+stat_categories = readStat()
 api.add_resource(Stat, "/api/stat/<string:idDocument>/<string:category>")
 api.add_resource(Search, "/api/search/<string:search>")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})

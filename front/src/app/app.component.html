@@ -3,7 +3,8 @@
     <span>WEM - Web Mining</span>
   </mat-toolbar>
 
-  <div class="container is-fluid mat-drawer-container" style="margin:0px; height:100%; overflow: auto">
+  <div class="container is-fluid mat-drawer-container" style="margin:0px; height:100%; overflow: auto"
+       id="basic_container">
     <div class="level">
       <div class="level-item has-text-centered">
         <div class="form has-text-centered">
@@ -14,7 +15,13 @@
           </mat-form-field>
         </div>
       </div>
+      <div style="float: right">
+        <button class="mat-raised-button"
+                (click)="displayAllStatCategory()">Stat all documents
+        </button>
+      </div>
     </div>
+
     <app-loading-screen></app-loading-screen>
     <div class="columns" style="margin: 0 20px" [hidden]="!data.length">
       <div class="column is-6">
@@ -70,7 +77,6 @@
                     [datasets]="statsCategory"
                     [labels]="barChartLabels"
                     [options]="barChartOptions"
-                    [plugins]="barChartPlugins"
                     [legend]="barChartLegend"
                     [chartType]="barChartType">
             </canvas>
