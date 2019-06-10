@@ -71,6 +71,13 @@ Romain :
 - Mise en place et utilisation du modèle LDA
 
 ## Fonctionnalités / Cas d’utilisation
+Une des principales fonctionnalités que permet l’application c’est le faite de pouvoir donné une URL et 
+de rechercher les articles qui ressemble à l’article donner par l’URL. 
+L’application permet aussi d’avoir des graphiques sur les catégories qui sont liées aux articles remontés. 
+Il est aussi possible d'afficher deux autres graphiques. 
+Un pour le nombre total d'articles et un autre pour voir qu'elles sont les catégories les plus utilisées
+
+
 
 ## Techniques, algorithmes et outils
 
