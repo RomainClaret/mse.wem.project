@@ -2,13 +2,15 @@ version: '3'
 
 services:
   neo4j:
-    image: neo4j:3.5
     container_name: wem-neo4j
+    build:
+      context: ./neo4j
     ports:
       - 7474:7474
       - 7687:7687
     environment:
       - NEO4J_AUTH=none
+      - NEO4J_dbms_security_procedures_unrestricted=algo.*
     volumes:
       - neo4j-data:/data
 
