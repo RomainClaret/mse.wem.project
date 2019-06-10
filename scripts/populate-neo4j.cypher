@@ -2,7 +2,7 @@
 USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM 'file:///neo4j-data/publications.csv' AS line
 CREATE (:Publication { id: line.id, title: line.title, summary: line.summary, pdf_link: line.pdf_link, categories: line.categories, authors: line.authors });
-CREATE INDEX ON :Publication(id);
+CREATE CONSTRAINT ON (p:Publication) ASSERT p.id IS UNIQUE;
 
 USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM 'file:///neo4j-data/categories.csv' AS line
