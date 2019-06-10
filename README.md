@@ -74,13 +74,11 @@ Romain :
 - Mise en place et utilisation du modèle LDA
 
 ## Fonctionnalités / Cas d’utilisation
-Une des principales fonctionnalités que permet l’application c’est le faite de pouvoir donné une URL et 
-de rechercher les articles qui ressemble à l’article donner par l’URL. 
-L’application permet aussi d’avoir des graphiques sur les catégories qui sont liées aux articles remontés. 
-Il est aussi possible d'afficher deux autres graphiques. 
-Un pour le nombre total d'articles et un autre pour voir qu'elles sont les catégories les plus utilisées
+La fonctionnalité principale de l'application est de pouvoir renseigner l'URL d'un article arXiv.org (par exemple http://arxiv.org/abs/1906.02739v1) afin de recevoir en retour une liste d'articles recommandés. Ceci sera fait au travers d'une interface Web simpliste.
 
+L'interface permettra également d'obtenir quelques statistiques sous forme de graphiques, liés aux articles remontés.
 
+Finalement, deux graphes plus généraux seront également visibles, permettant respectivement de visualiser le nombre d'articles publié par mois, ainsi que les catégories de arXiv.org les plus utilisées. 
 
 ## Techniques, algorithmes et outils
 
@@ -127,9 +125,14 @@ Pour tester l’application avec Docker, il suffit de se rendre à la racine du 
 
 Actuellement, le calcule de similarité entre deux sommets du graphe Neo4j donne la même importance aux auteurs et aux catégories. Une amélioration pourrait être de donner plus de poids à la catégorie principale, aux auteurs et moins de poids aux catégories secondaires.
 
-#### Précalculation des similarité
+#### Pré-calcul des similarités entre les publications
 
 Neo4j permet de calculer la similarité entre tous les sommets, selon la même fonction qu'actuellement utilisée. Cependant, il s'agit d'une opération très importante. Prendre le temps de précalculer toutes les similarités entre les publications permettrait de gagner du temps lors des requêtes. Il faudra par contre prévoir de calculer les nouvelles similarités lors de la mise à jour du graphe (par exemple lors de l'ajout d'une nouvelle publication).
 
-
 ## Conclusion
+
+The projet a été intéressant du début à la fin. Il nous a permis de mettre en pratique de crawling d'une API Web avec les problèmatiques de banissement qui en découlent, le stockage et le traitement d'une grande quantité de données.
+
+Nous pourrions grandement améliorer les différents algoritmes mis en place, ainsi que la fusion de valeurs retournées par ceux-ci. Cependant, afin d'arriver à des résultats plus précis, nous devrions utiliser des machines distantes et plus conséquentes. En effet, il devient déjà difficile de traiter toutes ces données sur une même machine, notamment avec Neo4j dans un conteneur Docker.
+
+Nous avons eu une grande utilité des Jupyter Notebooks qui nous ont permis de gagner beaucoup de temps lors de l'exploration des données, ainsi que durant l'élaboration des différentes requêtes et algorithmes.
