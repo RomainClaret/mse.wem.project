@@ -30,6 +30,12 @@ Pour la réparation du travail, nous avons essentiellement partagé ce projet en
 
 
 ## Fonctionnalités / cas d’utilisation
+Une des principales fonctionnalités que permet l’application c’est le faite de pouvoir donné une URL et 
+de rechercher les articles qui ressemble à l’article donner par l’URL. 
+L’application permet aussi d’avoir des graphiques sur les catégories qui sont liées aux articles remontés. 
+Il est aussi possible d'afficher deux autres graphiques. 
+Un pour le nombre total d'articles et un autre pour voir qu'elles sont les catégories les plus utilisées
+
 
 ## Techniques, algorithmes et outils utilisés (aussi en lien avec votre exposé)
 
@@ -42,7 +48,7 @@ Pour la création du site web, nous avons utilisé les différentes technologies
   * Bluma qui est un Framework CSS qui facilite la mise en place de la structure d’un page web
 
 Docker a aussi été utilisé pour créer les trois serveurs dont nous avons besoin :
-* Un serveur pour Neo4J
+* Un serveur pour Neo4J(Permet de stocker les données)
 * Un serveur pour Flask (Partie back)
 * Un serveur pour Angular(Partie Front)
 
