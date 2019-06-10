@@ -325,12 +325,24 @@ class Search(Resource):
         else:
             ranked_result_high = lda_result if len(lda_result)>len(neo4j_result) else neo4j_result
             ranked_result_low = lda_result if len(lda_result)<len(neo4j_result) else neo4j_result
-            ranked_result = ranked_result_high
+
+            ranked_result = ranked_result_high.copy()
+            down_vote_tracker = ranked_result_high.copy()
             
             for i,e in enumerate(ranked_result_high):
                 for j,t in enumerate(ranked_result_low):
                     if e["id"] in t["id"]:
-                        ranked_result[i]["id"], ranked_result[i-1]["id"] = ranked_result[i-1]["id"], ranked_result[i]["id"]
+                        if i-1 >= 0:
+                            ranked_result[i]["id"], ranked_result[i-1]["id"] = ranked_result[i-1]["id"], ranked_result[i]["id"]
+                        if e in down_vote_tracker:
+                            down_vote_tracker.remove(e)
+
+            for e in down_vote_tracker:
+                for j,t in enumerate(ranked_result):
+                    if e["id"] in t["id"]:
+                        if j-1 > 0:
+                            ranked_result[j-1]["id"], ranked_result[j]["id"] = ranked_result[j]["id"], ranked_result[j-1]["id"]
+
             return ranked_result
 
     def get(self):
