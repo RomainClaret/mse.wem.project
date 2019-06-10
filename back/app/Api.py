@@ -27,7 +27,6 @@ LIMIT 50
 """
 
 def fetch_neo4j_articles(pub):
-    print(pub)
     return [
         {
             'id': row['id'],
