@@ -47,7 +47,7 @@
             <h1 class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
             <span>
               <strong>Authors</strong>:
-              <span *ngFor="let author of objet.authors">{{author}} </span>
+              <span *ngFor="let author of objet.authors; index as i">{{author}} <span *ngIf="objet.authors.length-1>i">, </span></span>
             </span>
             <div><strong>Summary</strong>: {{objet.summary}}</div>
           </div>

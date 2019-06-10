@@ -77,9 +77,15 @@ class Search(Resource):
                 "categories": arxiv_categories,
                 "documents": [{"type": "pdf"}],
             }]
-            
+
         else:
-            return inMemory
+            result = []
+            search = search.strip()
+            for page in inMemory:
+               if page["summary"].find(search) > -1 or page["title"].find(search) > -1 or ", ".join(page["authors"]).find(search) > -1 :
+                    result.append(page)
+
+            return result
 
         
 
