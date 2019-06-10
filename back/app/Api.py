@@ -3,7 +3,7 @@ import re
 import re
 import xml.etree.ElementTree as ET
 from urllib.request import urlopen
-import pandas as pd
+# import pandas as pd
 
 from flask import Flask
 from flask_cors import CORS
@@ -75,7 +75,7 @@ class Search(Resource):
                 "pdf_link": arxiv_pdf,
                 "primary_category": arxiv_primary_category,
                 "categories": arxiv_categories,
-                "documents": {"type": "pdf"},
+                "documents": [{"type": "pdf"}],
             }]
             
         else:
