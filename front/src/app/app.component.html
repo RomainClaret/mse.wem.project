@@ -32,10 +32,10 @@
         <div *ngFor="let objet of data">
           <div style="font-size: 1.3em">
             <span>
-              <a href="https://arxiv.org/abs/{{objet.idPage}}" target="_blank">arXiv:{{objet.idPage}}</a>
+              <a href="{{objet.id}}" target="_blank">{{objet.id}}</a>
               <span class="linkDoc"> [</span>
               <span *ngFor="let document of objet.documents ; index as i"><a
-                href="https://arxiv.org/{{document.type}}/{{objet.idPage}}" style="display: inline;">{{document.type}}
+                href="{{objet.pdf_link}}" style="display: inline;">{{document.type}}
                 <ng-container *ngIf="i<objet.documents.length-1">,  </ng-container></a>
               </span>
               <span class="linkDoc">]</span>
@@ -43,6 +43,7 @@
                 <mat-chip *ngFor="let category of objet.categories"
                           (click)="displayStatCategory(category,objet)">{{category}}</mat-chip>
               </mat-chip-list>
+              <span>similarity: {{objet.similarity}}</span>
             </span>
             <h1 class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
             <span>

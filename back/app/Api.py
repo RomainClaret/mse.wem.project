@@ -26,7 +26,7 @@ CALL algo.similarity.overlap.stream(data, {sourceIds: sourceIds, concurrency:1, 
 YIELD item1, item2, similarity
 WITH algo.getNodeById(item1) AS from, algo.getNodeById(item2) AS to, similarity
 
-RETURN to.id AS id, to.title as title, to.summary as summary, to.pdf_link as pdf_link, similarity
+RETURN to.id AS id, to.title as title, to.summary as summary, to.pdf_link as pdf_link, to.categories as categories, to.authors as authors, similarity
 ORDER BY similarity DESC
 LIMIT 50
 """
@@ -37,11 +37,13 @@ LIMIT 50
                 'id': row['id'],
                 'title': row['title'],
                 'summary': row['summary'],
-                'authors': [],
+                'authors': row['authors'].split(','),
                 'affiliations': [],
                 'pdf_link': row['pdf_link'],
                 'primary_category': [],
-                'categories': '',
+                'categories': row['categories'].split(','),
+                'documents': {'type': 'pdf'},
+                'similarity': row['similarity'],
             }
             for row in results
         ]

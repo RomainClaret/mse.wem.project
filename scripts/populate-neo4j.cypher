@@ -1,7 +1,7 @@
 
 USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM 'file:///neo4j-data/publications.csv' AS line
-CREATE (:Publication { id: line.id, updated: line.updated, published: line.published, title: line.title, summary: line.summary, doi: line.doi, journal_ref: line.journal_ref, pdf_link: line.pdf_link });
+CREATE (:Publication { id: line.id, updated: line.updated, published: line.published, title: line.title, summary: line.summary, doi: line.doi, journal_ref: line.journal_ref, pdf_link: line.pdf_link, categories: line.categories, authors: line.authors });
 CREATE INDEX ON :Publication(id);
 
 USING PERIODIC COMMIT 500
