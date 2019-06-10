@@ -135,3 +135,6 @@ Neo4j permet de calculer la similarité entre tous les sommets, selon la même f
 ## Conclusion
 L'utilisation de Docker nous a permis de monter en compétence avec cette technologie
 La réalisation de chose simple n’est jamais si simple.
+La mise en place de l'infrastructure prend toujours plus de temps que prévu.
+C'est une fois que tout est en place que nous venons plus productifs. 
+Il ne faut donc jamais sous estimer cette partie
