@@ -24,7 +24,7 @@ Pour la réparation du travail, nous avons essentiellement partagé ce projet en
 * Une partie a consisté à aller chercher les données sur le site et de créer un fichier csv qui contient les données trouvées. 
 * Une autre partie à consister à utiliser Neo4J pour travailler ces données et de pouvoir réaliser certaines statistiques 
   et permettre de pouvoir répondre rechercher des articles similaires. 
-*Pour la troisième partie, il s’agissait de réaliser un site internet qui permet de rechercher et afficher ces articles. 
+* Pour la troisième partie, il s’agissait de réaliser un site internet qui permet de rechercher et afficher ces articles. 
  Il a aussi été choisi de pouvoir afficher des statistiques sur les catégories des articles. 
  Pour que ce site fonctionne il a aussi fallu mettre en place docker.
 
