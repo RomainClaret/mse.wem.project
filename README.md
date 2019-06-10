@@ -4,7 +4,10 @@ Semester Project - Web Mining at Master of Engineering (MSE), Switzerland
 
 ## Contexte et objectifs du projet
 
-Le but du projet est d’aller chercher des données sur le site arXiv.org qui a été créé en 1991 et qui a évolué au fil du temps. Car il a été déplacé en 2001 à l’université de Cornell. Ce site permet ’obtenir des archives numériques en accès libre et il fournit une API qui permet d’obtenir ces données.
+Le but du projet est d’aller chercher des données sur le site arXiv.org qui a été créé en 1991 et qui a évolué au fil du temps. Car il a été déplacé en 2001 à l’université de Cornell. 
+
+Ce site permet ’obtenir des archives numériques en accès libre et il fournit une API qui permet d’obtenir ces données.
+
 Le but principal c’est de pouvoir recherche des articles qui sont similaires à un autre article. Pour réaliser ce but, nous avons défini des objectifs qui sont les suivants :
 1. Aller chercher les données et les sauvegarder
 2. Réussir à trouver des articles similaires.
