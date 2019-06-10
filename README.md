@@ -48,7 +48,7 @@ Docker a aussi été utilisé pour créer les trois serveurs dont nous avons bes
 
 Pour tester l’application avec Docker il suffit de se rendre à la racine du projet où se trouve le fichier docker-compose.yml 
 et exécuter la commande suivante qui va créer les images que nous avons besoin et mettre en marche les serveurs 
-(Il faut être patient la premier fois) : `docker-compose up`
+(Il faut être patient la première fois) : `docker-compose up`
 
 Lors du premier lancement avec Docker il faut aussi exécuter le script init-neo4j.bash qui se trouve dans le dossier script. 
 Ce script permet de peupler Neo4J

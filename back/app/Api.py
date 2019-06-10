@@ -37,7 +37,7 @@ def fetch_neo4j_articles(pub):
             'pdf_link': row['pdf_link'],
             'primary_category': [],
             'categories': row['categories'].split(','),
-            'documents': {'type': 'pdf'},
+            'documents': [{'type': 'pdf'}],
             'similarity': row['similarity'],
         }
         for row in graph.run(query, pub=pub)
