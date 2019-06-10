@@ -50,5 +50,9 @@ Pour tester l’application avec Docker il suffit de se rendre à la racine du p
 et exécuter la commande suivante qui va créer les images que nous avons besoin et mettre en marche les serveurs 
 (Il faut être patient la premier fois) : `docker-compose up`
 
+Lors du premier lancement avec Docker il faut aussi exécuter le script init-neo4j.bash qui se trouve dans le dossier script. 
+Ce script permet de peupler Neo4J
+
+
 
 ## Conclusion
