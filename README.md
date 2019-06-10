@@ -90,7 +90,7 @@ Le système de recommandation utilise le modèle LDA afin de retourner les N art
 
 ##### Neo4j
 
-La base de données Neo4j permet d'enregistrer les différentes publications et de les lier à leurs auteurs, leurs catégories, ainsi qu'à leurs affiliations. Ceci permettra ensuite de comparer les relations d'un neouds aux autres en utilisant des algorithm3es de similarité, par exemple l'algorithme de Jaccard qui a été utilisé  durant ce projet. Celui-ci va calculer la similarité entre les liens de deux publications qui va être comprises dans l'intervalle $[0,1]$.
+La base de données Neo4j permet d'enregistrer les différentes publications et de les lier à leurs auteurs, leurs catégories, ainsi qu'à leurs affiliations. Ceci permettra ensuite de comparer les relations d'un neouds aux autres en utilisant des algorithmes de similarité, par exemple l'algorithme de Jaccard qui a été utilisé  durant ce projet. Celui-ci va calculer la similarité entre les liens de deux publications qui va être comprises dans l'intervalle $[0,1]$.
 
 #### Interface utilisateur
 
