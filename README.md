@@ -67,6 +67,7 @@ Damien :
 Dorian :
 - Mise en place de l'interface graphique 
 - Back-end pour gérer les API REST
+- Docker pour le front et le back-end
 
 Romain :
 - Crawling de l'API
