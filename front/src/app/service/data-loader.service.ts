@@ -14,7 +14,7 @@ export class DataLoaderService {
   }
 
   search(valueSearch, pageSize, page): Observable<any> {
-    return this.http.get<any>(`${environment.server}/api/search/${valueSearch}?page=${page}&pageSize=${pageSize}`)
+    return this.http.get<any>(`${environment.server}/api/search?id=${encodeURIComponent(valueSearch)}&page=${page}&pageSize=${pageSize}`)
       .pipe(debounceTime(200), distinctUntilChanged());
   }
 
