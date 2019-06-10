@@ -43,8 +43,9 @@
                 <mat-chip *ngFor="let category of objet.categories"
                           (click)="displayStatCategory(category,objet)">{{category}}</mat-chip>
               </mat-chip-list>
-              <span>similarity: {{objet.similarity}}</span>
-            </span>
+              <span style="float: right;padding-right: 20px;">
+                <span style="font-weight: bold;color:#f6c9f9">similarity:</span> {{objet.similarity}}</span>
+              </span>
             <h1 class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
             <span>
               <strong>Authors</strong>:
