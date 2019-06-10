@@ -64,7 +64,7 @@ Damien :
 Dorian :
 
 - Mise en place de l'interface graphique 
-- Du back-end pour gérer les API REST
+- Back-end pour gérer les API REST
 
 Romain :
 
