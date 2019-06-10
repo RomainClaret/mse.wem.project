@@ -48,7 +48,8 @@
             <h1 class=" title" style="font-size: 1.3em">{{objet.title}}</h1>
             <span>
               <strong>Authors</strong>:
-              <span *ngFor="let author of objet.authors; index as i">{{author}} <span *ngIf="objet.authors.length-1>i">, </span></span>
+              <span *ngFor="let author of objet.authors; index as i">{{author}} <span
+                *ngIf="objet.authors.length-1>i">, </span></span>
             </span>
             <div><strong>Summary</strong>: {{objet.summary}}</div>
           </div>
@@ -76,6 +77,10 @@
       </div> -->
       <div class="column is-6">
         <div *ngIf="statsCategory.length">
+          <button mat-icon-button aria-label="Close graph" (click)="closeStat()"
+                  style="position: fixed;right: 0;margin-right: 50px;margin-top: 70px; z-index: 1000">
+            <mat-icon>close</mat-icon>
+          </button>
           <div style="display: block" class="stat">
             <h1 class="title">{{docStatSelected.title}}</h1>
             <canvas baseChart

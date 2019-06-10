@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {
+  MatButtonModule,
   MatCardModule,
   MatChipsModule,
   MatFormFieldModule,
@@ -31,6 +32,7 @@ import {ChartsModule} from 'ng2-charts';
     BrowserAnimationsModule,
     RouterModule,
     MatToolbarModule,
+    MatButtonModule,
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,

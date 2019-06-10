@@ -112,6 +112,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  closeStat() {
+    this.statsCategory = [];
+  }
+
   private applyDarkTheme() {
     const color = '#e0e0e0';
     const overrides = {
