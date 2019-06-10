@@ -132,7 +132,7 @@ def fetch_neo4j_articles(pub):
 
 def arxiv_to_front_from_df(ranked_articles_by_id):
     arxiv_id_url_regex = r"(\d{4}\.(\d{5}|\d{4})|\d{7})"
-    print(len(ranked_articles_by_id))
+    #print(len(ranked_articles_by_id))
 
     articles = []
     for article in ranked_articles_by_id:
@@ -317,11 +317,21 @@ class Search(Resource):
 
     def searchData(self, search):
         neo4j_result = fetch_neo4j_articles(search)
+        lda_result = fetch_arxiv(search)
 
         if len(neo4j_result) == 0:
-            return fetch_arxiv(search)
+            return lda_result
+            
         else:
-            return neo4j_result
+            ranked_result_high = lda_result if len(lda_result)>len(neo4j_result) else neo4j_result
+            ranked_result_low = lda_result if len(lda_result)<len(neo4j_result) else neo4j_result
+            ranked_result = ranked_result_high
+            
+            for i,e in enumerate(ranked_result_high):
+                for j,t in enumerate(ranked_result_low):
+                    if e["id"] in t["id"]:
+                        ranked_result[i]["id"], ranked_result[i-1]["id"] = ranked_result[i-1]["id"], ranked_result[i]["id"]
+            return ranked_result
 
     def get(self):
         parser = reqparse.RequestParser()
@@ -334,7 +344,7 @@ class Search(Resource):
         page = args["page"]
         result = self.searchData(search)
         total = len(result)
-        print(str(page_size) + " " + search + " " + str(page))
+        #print(str(page_size) + " " + search + " " + str(page))
         return {"total": total, "page": page,
                 "pageSize": page_size,
                 "search": search,
