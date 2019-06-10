@@ -1,64 +1,109 @@
 # mse.wem.project
-Semester Project - Web Mining at Master of Engineering (MSE), Switzerland
+Web Mining at Master of Engineering (MSE), Switzerland
+
+Auteurs: Romain Claret, Dorian Magnin & Damien Rochat
 
 
 ## Contexte et objectifs du projet
 
-Le but du projet est d’aller chercher des données sur le site arXiv.org qui a été créé en 1991 et qui a évolué au fil du temps. 
-Car il a été déplacé en 2001 à l’université de Cornell. 
+Le site arXiv.org permet d’obtenir des articles numériques en accès libre. Le site a été créé en 1991 dans le but d'echanger des preprints dans le domaine de la physique. Il est aujourd'hui géré par la Cornell University Library et il héberge des preprints, postprints et des articles du domaine publique.
 
-Le site arXiv.org permet d’obtenir des archives numériques en accès libre et il fournit une API qui permet d’obtenir ces données.
+Il y a aujourd'hui **1'519'310 soumissions** dans des champs divers et variés tels que la physique, les mathématiques, l'informatique, la biologie, la finance, les statistiques ou encore l'économie.
 
-Le but principal c’est de pouvoir recherche des articles qui sont similaires à un autre article. 
-Pour réaliser ce but, nous avons défini des objectifs qui sont les suivants :
-1. Aller chercher les données et les sauvegarder
-2. Réussir à trouver des articles similaires.
-3. Réaliser une interface utilisateur pour la recherche d’article similaire
-4. Utiliser Docker pour faire tourner tous les serveurs que l’on a besoin.
+Actuellement, arXiv.org propose un champs de recherche avec quelques filtres, ce qu'il n'est pas idéal pour découvrir des articles qui pourraient potentiellement nous intéresser. Le but de ce projet est donc de développer une petite interface qui va permettre de recevoir des recommandation d'articles, en fonction d'un article donné.
 
+Les objects sont :
 
-## Données (sources, quantité, évtl. pré-traitement, description)
+1. Récupérer et stocker les données de arXiv.org
+2. Mettre en place un système de recommandation
+3. Classer les articles recommandés
+4. Développer une interface simple pour l'utiliser le système de recommandation
+5. Afficher des statistiques sur les données depuis l'interface
+6. Exécuter les différents services dans une infrastructure Docker
+
+## Données (sources, quantité, pré-traitement, description)
+
+arXiv.org met à disposition une API gratuite permettant de récupérer les articles au format XML. Celle-ci possède les mêmes fonctions que le moteur de recherche du site.
+
+Ci-dessous, la description des différents champs retournés par l'API. Les champs en gras sont ceux qui seront stockés et utilisés le calcul de la similarité entre les articles.
+
+| Champs               | Description                                             |
+| -------------------- | ------------------------------------------------------- |
+| **title**            | Titre de l'article                                      |
+| **id**               | Url de l'article, au format http://arxiv.org/abs/id     |
+| published            | Date de première soumission de l'article (version 1)    |
+| updated              | Date de soumission de la versiona actuelle de l'article |
+| **summary**          | Résumé de l'article                                     |
+| **author**           | Nom des différents auteurs de l'article                 |
+| **link**             | Liens vers l'article (PDF)                              |
+| **category**         | Catégories de l'article (catégories arXiv, ACM et MSC)  |
+| **primary_category** | Catégorie arXiv principale de l'article                 |
+| **affiliation**      | Affiliation de l'auteur (université, société, etc.)     |
+| journal_ref          | Référence de journal si existant                        |
+| doi                  | URL DOI si existant                                     |
+
+Dans le cadre de ce projet, seuls les articles de la catégorie **Computer Sciences **sont récupérés. Cela représente un total de **180'644 publications**, **8'498 catégories**, **205'782 auteurs** et **6'961 affiliations**.
 
 ## Planification, répartition du travail
-Pour la réparation du travail, nous avons essentiellement partagé ce projet en trois et avancé parallèlement.
-* Une partie a consisté à aller chercher les données sur le site et de créer un fichier csv qui contient les données trouvées. 
-* Une autre partie à consister à utiliser Neo4J pour travailler ces données et de pouvoir réaliser certaines statistiques 
-  et permettre de pouvoir répondre a la rechercher des articles similaires. 
-* Pour la troisième partie, il s’agissait de réaliser un site internet qui permet de rechercher et afficher ces articles. 
- Il a aussi été choisi de pouvoir afficher des statistiques sur les catégories des articles. 
- Pour que ce site fonctionne il a aussi fallu mettre en place docker.
+Voici les différentes milestones du projet :
 
+- Créer le crawler pour l'API arXiv.org
+- Stocker les données dans un fichier CSV de référence
+- Mettre en place le classement par similarité de Neo4j
 
-## Fonctionnalités / cas d’utilisation
-Une des principales fonctionnalités que permet l’application c’est le faite de pouvoir donné une URL et 
-de rechercher les articles qui ressemble à l’article donner par l’URL. 
-L’application permet aussi d’avoir des graphiques sur les catégories qui sont liées aux articles remontés. 
-Il est aussi possible d'afficher deux autres graphiques. 
-Un pour le nombre total d'articles et un autre pour voir qu'elles sont les catégories les plus utilisées
+- Mettre en place le classement avec le modèle LDA
+- Mettre en place l'interface graphique
 
+Ci-dessous, la liste des différentes tâches réalisées par chacun des membres du groupe. Il est à noter que certainent tâches ont été réalisées par plusieurs personnes.
 
-## Techniques, algorithmes et outils utilisés (aussi en lien avec votre exposé)
+Damien :
 
-Pour la création du site web, nous avons utilisé les différentes technologies :
-* Flask qui un Framework développé en Python et qui permet de mettre en place une gestion des API REST.
-* Angular qui est un Framework développé en typeScript et permet de réaliser une interface web. 
+- Création du fichier CSV de référence
+- Mise en place et utilisation de Neo4j
+
+Dorian :
+
+- Mise en place de l'interface graphique
+
+Romain :
+
+- Crawling de l'API
+- Mise en place et utilisation du modèle LDA
+
+## Fonctionnalités / Cas d’utilisation
+
+## Techniques, algorithmes et outils
+
+#### Algorithme de recommandation
+
+Le système de recommandation utilise le modèle LDA afin de retourner les N articles les plus similaires en terme de contenu (basé sur le titre et le résumé), ensuite la base de données Neo4j calcule les similarités entre ces articles et celui recherché en comparant leur liens (auteurs, catégories et affiliations).
+
+##### Modèle LDA
+
+##### Neo4j
+
+La base de données Neo4j permet d'enregistrer les différentes publications et de les lier à leurs auteurs, leurs catégories, ainsi qu'à leurs affiliations. Ceci permettra ensuite de comparer les relations d'un neouds aux autres en utilisant des algorithm3es de similarité, par exemple l'algorithme de Jaccard qui a été utilisé  durant ce projet. Celui-ci va calculer la similarité entre les liens de deux publications qui va être comprises dans l'intervalle $[0,1]$.
+
+#### Interface utilisateur
+
+Pour la création du site web, nous avons utilisé différentes technologies suivantes :
+
+- Flask qui un Framework développé en Python et qui permet de mettre en place une gestion des API REST.
+- Angular qui est un Framework développé en TypeScript et qui permet de réaliser une interface Web. 
   Ces différents composants ont été utilisé avec Angular : 
-  * ng-chartjs permet de réaliser les graphiques
-  * Material qui fournit des composants de conception matérielle pour Angular  
-  * Bluma qui est un Framework CSS qui facilite la mise en place de la structure d’un page web
+- ng-chartjs permet de réaliser les graphiques.
+  - Material qui fournit des composants de conception matérielle pour Angular.
+  - Bluma qui est un Framework CSS qui facilite la mise en place de la structure d’un page Web.
 
-Docker a aussi été utilisé pour créer les trois serveurs dont nous avons besoin :
-* Un serveur pour Neo4J(Permet de stocker les données)
-* Un serveur pour Flask (Partie back)
-* Un serveur pour Angular(Partie Front)
+#### Infrastructure Docker
 
-Pour tester l’application avec Docker il suffit de se rendre à la racine du projet où se trouve le fichier docker-compose.yml 
-et exécuter la commande suivante qui va créer les images que nous avons besoin et mettre en marche les serveurs 
-(Il faut être patient la première fois) : `docker-compose up`
+Docker a aussi été utilisé pour créer les trois serveurs dont nous avions besoin :
 
-Lors du premier lancement avec Docker il faut aussi exécuter le script init-neo4j.bash qui se trouve dans le dossier script. 
-Ce script permet de peupler Neo4J
+- Un serveur pour Neo4J
+- Un serveur pour Flask (partie backend)
+- Un serveur pour Angular (partie frontent)
 
+Pour tester l’application avec Docker, il suffit de se rendre à la racine du projet (où se trouve le fichier `docker-compose.yml` et d'exécuter la commande suivante `docker-compose up` qui va créer les images nécessaires.
 
 
 ## Conclusion
