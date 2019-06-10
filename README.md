@@ -94,7 +94,7 @@ La base de données Neo4j permet d'enregistrer les différentes publications et 
 
 #### Interface utilisateur
 
-Pour la création du site web, nous avons utilisé différentes technologies suivantes :
+Pour la création du site web, nous avons utilisé différentes technologies qui sont suivantes :
 
 - Flask qui un Framework développé en Python et qui permet de mettre en place une gestion des API REST.
 - Angular qui est un Framework développé en TypeScript et qui permet de réaliser une interface Web. 
