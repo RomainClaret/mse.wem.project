@@ -94,7 +94,7 @@ Le système de recommandation utilise le modèle LDA afin de retourner les N art
 
 Neo4j est une base de données permettant de stocker des données de types graphe. Les publications, les auteurs et les catégories sont stockés comme des sommets. Les liens sont ensuite ajoutés entre chacun d'eux, selon les données reçues.
 
-![neo4j-graph](/Users/damien/Cours/Master/WEM/Project/images/neo4j-graph.png)
+![neo4j-graph](./images/neo4j-graph.png)
 
 Les liens permettent ensuite de comparer les relations communes entre plusieurs noeuds, avec un algorithme de similarité. C'est l'algorithe de Jaccard qui a été utilisé dans ce cas. Celui-ci va comparer les sommets voisins de plusieurs sommets donnés et produire un résultat représentant la similarité, cette valeur est comprise dans l'intervalle $[0,1]$.
 
@@ -126,6 +126,10 @@ Pour tester l’application avec Docker, il suffit de se rendre à la racine du 
 #### Pondération des relations dans Neo4j
 
 Actuellement, le calcule de similarité entre deux sommets du graphe Neo4j donne la même importance aux auteurs et aux catégories. Une amélioration pourrait être de donner plus de poids à la catégorie principale, aux auteurs et moins de poids aux catégories secondaires.
+
+#### Précalculation des similarité
+
+Neo4j permet de calculer la similarité entre tous les sommets, selon la même fonction qu'actuellement utilisée. Cependant, il s'agit d'une opération très importante. Prendre le temps de précalculer toutes les similarités entre les publications permettrait de gagner du temps lors des requêtes. Il faudra par contre prévoir de calculer les nouvelles similarités lors de la mise à jour du graphe (par exemple lors de l'ajout d'une nouvelle publication).
 
 
 ## Conclusion
