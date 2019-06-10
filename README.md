@@ -80,6 +80,8 @@ L'interface permettra également d'obtenir quelques statistiques sous forme de g
 
 Finalement, deux graphes plus généraux seront également visibles, permettant respectivement de visualiser le nombre d'articles publié par mois, ainsi que les catégories de arXiv.org les plus utilisées. 
 
+![neo4j-graph](./images/screenshot.png)
+
 ## Techniques, algorithmes et outils
 
 #### Algorithme de recommandation
