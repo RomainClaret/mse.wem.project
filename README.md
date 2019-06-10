@@ -109,7 +109,7 @@ Docker a aussi été utilisé pour créer les trois serveurs dont nous avions be
 
 - Un serveur pour Neo4J
 - Un serveur pour Flask (partie backend)
-- Un serveur pour Angular (partie frontent)
+- Un serveur pour Angular (partie frontend)
 
 Pour tester l’application avec Docker, il suffit de se rendre à la racine du projet (où se trouve le fichier `docker-compose.yml` et d'exécuter la commande suivante `docker-compose up` qui va créer les images nécessaires.
 
