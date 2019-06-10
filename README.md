@@ -100,6 +100,8 @@ Les liens permettent ensuite de comparer les relations communes entre plusieurs 
 
 En résumé, plus deux publications auront d'auteurs et de catégories en commun, plus leur similarité sera élevée.
 
+Dans le cadre de ce projet, seules 50'000 publications ont été enregistrées dans Neo4j. En effet, plus d'entrées provoquaient des problèmes de mémoire liés à la machine virtuelle Java. Il a été possible d'ajouter toutes les données en splittant les datasets et en les enregistrant une partie après l'autre. Mais la quantité de données a rendu impossible le calcul des similarités en live. De plus, un pré-calcul n'était pas possible, car cela provoquait également des problèmes de mémoire.
+
 #### Interface utilisateur
 
 Pour la création du site web, nous avons utilisé différentes technologies qui sont suivantes :
