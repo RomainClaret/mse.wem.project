@@ -65,7 +65,8 @@ Damien :
 
 Dorian :
 
-- Mise en place de l'interface graphique
+- Mise en place de l'interface graphique 
+- Back-end pour gérer les API REST
 
 Romain :
 
@@ -73,6 +74,13 @@ Romain :
 - Mise en place et utilisation du modèle LDA
 
 ## Fonctionnalités / Cas d’utilisation
+Une des principales fonctionnalités que permet l’application c’est le faite de pouvoir donné une URL et 
+de rechercher les articles qui ressemble à l’article donner par l’URL. 
+L’application permet aussi d’avoir des graphiques sur les catégories qui sont liées aux articles remontés. 
+Il est aussi possible d'afficher deux autres graphiques. 
+Un pour le nombre total d'articles et un autre pour voir qu'elles sont les catégories les plus utilisées
+
+
 
 ## Techniques, algorithmes et outils
 
@@ -92,12 +100,12 @@ Les liens permettent ensuite de comparer les relations communes entre plusieurs 
 
 #### Interface utilisateur
 
-Pour la création du site web, nous avons utilisé différentes technologies suivantes :
+Pour la création du site web, nous avons utilisé différentes technologies qui sont suivantes :
 
 - Flask qui un Framework développé en Python et qui permet de mettre en place une gestion des API REST.
 - Angular qui est un Framework développé en TypeScript et qui permet de réaliser une interface Web. 
   Ces différents composants ont été utilisé avec Angular : 
-- ng-chartjs permet de réaliser les graphiques.
+  - ng-chartjs permet de réaliser les graphiques.
   - Material qui fournit des composants de conception matérielle pour Angular.
   - Bluma qui est un Framework CSS qui facilite la mise en place de la structure d’un page Web.
 
@@ -107,7 +115,7 @@ Docker a aussi été utilisé pour créer les trois serveurs dont nous avions be
 
 - Un serveur pour Neo4J
 - Un serveur pour Flask (partie backend)
-- Un serveur pour Angular (partie frontent)
+- Un serveur pour Angular (partie frontend)
 
 Pour tester l’application avec Docker, il suffit de se rendre à la racine du projet (où se trouve le fichier `docker-compose.yml` et d'exécuter la commande suivante `docker-compose up` qui va créer les images nécessaires.
 
