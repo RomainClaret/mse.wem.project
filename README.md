@@ -131,7 +131,7 @@ Neo4j permet de calculer la similarité entre tous les sommets, selon la même f
 
 ## Conclusion
 
-The projet a été intéressant du début à la fin. Il nous a permis de mettre en pratique de crawling d'une API Web avec les problèmatiques de banissement qui en découlent, le stockage et le traitement d'une grande quantité de données.
+Le projet a été intéressant du début à la fin. Il nous a permis de mettre en pratique de crawling d'une API Web avec les problèmatiques de banissement qui en découlent, le stockage et le traitement d'une grande quantité de données.
 
 Nous pourrions grandement améliorer les différents algoritmes mis en place, ainsi que la fusion de valeurs retournées par ceux-ci. Cependant, afin d'arriver à des résultats plus précis, nous devrions utiliser des machines distantes et plus conséquentes. En effet, il devient déjà difficile de traiter toutes ces données sur une même machine, notamment avec Neo4j dans un conteneur Docker.
 
