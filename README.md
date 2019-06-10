@@ -25,7 +25,7 @@ Les objects sont :
 
 arXiv.org met à disposition une API gratuite permettant de récupérer les articles au format XML. Celle-ci possède les mêmes fonctions que le moteur de recherche du site.
 
-Ci-dessous, la description des différents champs retournés par l'API. Les champs en gras sont ceux qui seront stockés et utilisés le calcul de la similarité entre les articles.
+Ci-dessous, la description des différents champs retournés par l'API.
 
 | Champs               | Description                                             |
 | -------------------- | ------------------------------------------------------- |
@@ -38,11 +38,13 @@ Ci-dessous, la description des différents champs retournés par l'API. Les cham
 | **link**             | Liens vers l'article (PDF)                              |
 | **category**         | Catégories de l'article (catégories arXiv, ACM et MSC)  |
 | **primary_category** | Catégorie arXiv principale de l'article                 |
-| **affiliation**      | Affiliation de l'auteur (université, société, etc.)     |
+| affiliation          | Affiliation de l'auteur (université, société, etc.)     |
 | journal_ref          | Référence de journal si existant                        |
 | doi                  | URL DOI si existant                                     |
 
-Dans le cadre de ce projet, seuls les articles de la catégorie **Computer Sciences **sont récupérés. Cela représente un total de **180'644 publications**, **8'498 catégories**, **205'782 auteurs** et **6'961 affiliations**.
+Les champs en gras sont ceux qui sont utilisés pour ce projet.
+
+Seuls les articles de la catégorie **Computer Sciences **sont récupérés. Cela représente un total de **180'644 publications**, **194 catégories** et **205'782 auteurs**.
 
 ## Planification, répartition du travail
 Voici les différentes milestones du projet :
@@ -76,13 +78,17 @@ Romain :
 
 #### Algorithme de recommandation
 
-Le système de recommandation utilise le modèle LDA afin de retourner les N articles les plus similaires en terme de contenu (basé sur le titre et le résumé), ensuite la base de données Neo4j calcule les similarités entre ces articles et celui recherché en comparant leur liens (auteurs, catégories et affiliations).
+Le système de recommandation utilise le modèle LDA afin de retourner les N articles les plus similaires en terme de contenu (basé sur le titre et le résumé), ensuite la base de données Neo4j calcule les similarités entre ces articles et celui recherché en comparant leur liens (auteurs et catégories).
 
 ##### Modèle LDA
 
 ##### Neo4j
 
-La base de données Neo4j permet d'enregistrer les différentes publications et de les lier à leurs auteurs, leurs catégories, ainsi qu'à leurs affiliations. Ceci permettra ensuite de comparer les relations d'un neouds aux autres en utilisant des algorithm3es de similarité, par exemple l'algorithme de Jaccard qui a été utilisé  durant ce projet. Celui-ci va calculer la similarité entre les liens de deux publications qui va être comprises dans l'intervalle $[0,1]$.
+Neo4j est une base de données permettant de stocker des données de types graphe. Les publications, les auteurs et les catégories sont stockés comme des sommets. Les liens sont ensuite ajoutés entre chacun d'eux, selon les données reçues.
+
+![neo4j-graph](/Users/damien/Cours/Master/WEM/Project/images/neo4j-graph.png)
+
+Les liens permettent ensuite de comparer les relations communes entre plusieurs noeuds, avec un algorithme de similarité. C'est l'algorithe de Jaccard qui a été utilisé dans ce cas. Celui-ci va comparer les sommets voisins de plusieurs sommets donnés et produire un résultat représentant la similarité, cette valeur est comprise dans l'intervalle $[0,1]$.
 
 #### Interface utilisateur
 
