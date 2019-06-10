@@ -91,7 +91,7 @@ Pour la création du site web, nous avons utilisé différentes technologies sui
 - Flask qui un Framework développé en Python et qui permet de mettre en place une gestion des API REST.
 - Angular qui est un Framework développé en TypeScript et qui permet de réaliser une interface Web. 
   Ces différents composants ont été utilisé avec Angular : 
-  - ng-chartjs permet de réaliser les graphiques.
+- ng-chartjs permet de réaliser les graphiques.
   - Material qui fournit des composants de conception matérielle pour Angular.
   - Bluma qui est un Framework CSS qui facilite la mise en place de la structure d’un page Web.
 
