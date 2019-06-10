@@ -98,6 +98,8 @@ Neo4j est une base de données permettant de stocker des données de types graph
 
 Les liens permettent ensuite de comparer les relations communes entre plusieurs noeuds, avec un algorithme de similarité. C'est l'algorithe de Jaccard qui a été utilisé dans ce cas. Celui-ci va comparer les sommets voisins de plusieurs sommets donnés et produire un résultat représentant la similarité, cette valeur est comprise dans l'intervalle $[0,1]$.
 
+En résumé, plus deux publications auront d'auteurs et de catégories en commun, plus leur similarité sera élevée.
+
 #### Interface utilisateur
 
 Pour la création du site web, nous avons utilisé différentes technologies qui sont suivantes :
@@ -118,6 +120,12 @@ Docker a aussi été utilisé pour créer les trois serveurs dont nous avions be
 - Un serveur pour Angular (partie frontend)
 
 Pour tester l’application avec Docker, il suffit de se rendre à la racine du projet (où se trouve le fichier `docker-compose.yml` et d'exécuter la commande suivante `docker-compose up` qui va créer les images nécessaires.
+
+## Améliorations et prochaines étapes
+
+#### Pondération des relations dans Neo4j
+
+Actuellement, le calcule de similarité entre deux sommets du graphe Neo4j donne la même importance aux auteurs et aux catégories. Une amélioration pourrait être de donner plus de poids à la catégorie principale, aux auteurs et moins de poids aux catégories secondaires.
 
 
 ## Conclusion
